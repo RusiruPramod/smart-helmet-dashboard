@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +17,7 @@ body {
   min-height: 100vh;
 }
 
-/* Glass morphism effect */
+/* Enhanced Glassmorphism */
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
@@ -30,7 +32,7 @@ body {
   box-shadow: 0 12px 40px rgba(31, 38, 135, 0.12);
 }
 
-/* Gauge styles */
+/* Enhanced Gauge */
 .gauge-container {
   position: relative;
   width: 140px;
