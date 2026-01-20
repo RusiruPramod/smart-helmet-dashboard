@@ -58,7 +58,212 @@ body {
   transition: transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Voice wave animation */
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-up {
+  animation: fadeUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-down {
+  animation: fadeDown 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.fade-left {
+  animation: fadeLeft 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.fade-right {
+  animation: fadeRight 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+/* Dashboard specific animations - KEEP BOUNCE */
+.bounce-in {
+  animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  opacity: 0;
+}
+
+/* Smooth animations for other sections */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  to { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  to { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% { 
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% { 
+    transform: scale(0.9);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Page transition */
+.page-enter {
+  animation: pageEnter 0.6s ease-out forwards;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Progress bar animation */
+.progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #3B82F6 0%, #60A5FA 100%);
+  width: 0%;
+  transition: width 1.2s ease-in-out;
+}
+
+/* Chart bars animation */
+.chart-bar {
+  transform-origin: bottom;
+  transform: scaleY(0);
+  animation: growBar 1.5s ease-out forwards;
+}
+
+@keyframes growBar {
+  to { transform: scaleY(1); }
+}
+
+/* Live time pulsing effect */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.live-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e2e8f0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+input:checked + .toggle-slider {
+  background-color: #3b82f6;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* Worker markers for map */
+.worker-marker {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #3b82f6;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.worker-marker.safe { 
+  background: #10b981; 
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); 
+}
+.worker-marker.warning { 
+  background: #f59e0b; 
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); 
+}
+.worker-marker.danger { 
+  background: #ef4444; 
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3); 
+}
+
+/* WhatsApp/Audacity Style Voice Wave */
 .voice-wave-container {
   position: relative;
   width: 100%;
@@ -88,11 +293,206 @@ body {
   background: linear-gradient(to top, #3b82f6, #60a5fa);
   border-radius: 2px 2px 0 0;
   transform-origin: bottom;
+  animation: waveBar 1.5s ease-in-out infinite;
   opacity: 0.7;
 }
 
-.wave-bar.animate {
-  animation: waveBar 1.5s ease-in-out infinite;
+.wave-bar:nth-child(odd) {
+  background: linear-gradient(to top, #2563eb, #3b82f6);
+  animation-delay: 0.2s;
+}
+
+@keyframes waveBar {
+  0%, 100% { 
+    transform: scaleY(0.3);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Voice Controls */
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.voice-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.voice-btn.record {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.voice-btn.record.active {
+  animation: recordingPulse 1.5s infinite;
+}
+
+.voice-btn.stop {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  color: white;
+}
+
+.voice-btn.send {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.voice-btn.play {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.voice-btn.pause {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.voice-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.voice-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.voice-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Recording Animation */
+@keyframes recordingPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% { 
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Voice Message Bubbles */
+.voice-message-bubble {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 24px;
+  padding: 16px;
+  margin: 12px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-message-bubble.received {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  margin-left: auto;
+}
+
+/* Voice Message Info */
+.voice-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.voice-duration {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Connected Users */
+.connected-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.connected-user:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.user-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.user-status.talking {
+  background: #3b82f6;
+  animation: pulse 1s infinite;
+}
+
+/* Crack lines */
+.crack-line {
+  position: absolute;
+  background: rgba(239, 68, 68, 0.4);
+  border-radius: 2px;
+  transform-origin: 0 0;
+}
+
+/* Map grid */
+.map-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-safe {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.status-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.status-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
 }
 
 /* Scrollbar styling */
@@ -115,18 +515,6 @@ body {
   background: rgba(148, 163, 184, 0.8);
 }
 
-/* Leaflet map fixes */
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-  border-radius: 1rem;
-}
-
-/* Toast notifications styling */
-.toaster-container {
-  z-index: 9999;
-}
-
 /* Loading spinner */
 @keyframes spin {
   to {
@@ -138,23 +526,20 @@ body {
   animation: spin 1s linear infinite;
 }
 
-/* Fade animations */
-.fade-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.fade-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.fade-exit {
-  opacity: 1;
-}
-
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 0.3s ease;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 400px !important;
+  }
+  
+  .gauge-container {
+    width: 100px;
+    height: 50px;
+  }
+  
+  .gauge-bg, .gauge-fill {
+    width: 100px;
+    height: 100px;
+    border-width: 8px;
+  }
 }
